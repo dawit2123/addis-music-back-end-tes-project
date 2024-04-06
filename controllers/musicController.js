@@ -41,10 +41,10 @@ export const processFiles = asyncHandler(async (req, res, next) => {
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
     .toFile(
-      `${__dirname}/public/img/music/${req.files["coverImage"].originalname}.jpeg`
+      `${__dirname}/../public/img/music/${req.files["coverImage"].originalname}.jpeg`
     );
   // Convert audio buffer to file and store it
-  const audioFilePath = `${__dirname}/public/audio/music/${req.files["audioFile"].originalname}`;
+  const audioFilePath = `${__dirname}/../public/audio/music/${req.files["audioFile"].originalname}`;
   fs.writeFile(
     audioFilePath,
     req.files["audioFile"][0].buffer,
@@ -113,7 +113,7 @@ export const deleteMusic = asyncHandler(async (req, res) => {
   const audioFilePath = `${path.dirname(__dirname)}/public/audio/music/${
     data.audioFile
   }`;
-  const imageFilePath = `${path.dirname(__dirname)}/../public/img/music/${
+  const imageFilePath = `${path.dirname(__dirname)}/public/img/music/${
     data.coverImage
   }.jpeg`;
   console.log(audioFilePath, imageFilePath);
