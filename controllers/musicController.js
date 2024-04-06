@@ -110,8 +110,12 @@ export const updateMusic = asyncHandler(async (req, res) => {
 
 export const deleteMusic = asyncHandler(async (req, res) => {
   const data = await Music.findById(req.params.id);
-  const audioFilePath = `${__dirname}/../public/audio/music/${data.audioFile}`;
-  const imageFilePath = `${__dirname}/../public/img/music/${data.coverImage}.jpeg`;
+  const audioFilePath = `${path.dirname(__dirname)}/public/audio/music/${
+    data.audioFile
+  }`;
+  const imageFilePath = `${path.dirname(__dirname)}/../public/img/music/${
+    data.coverImage
+  }.jpeg`;
   console.log(audioFilePath, imageFilePath);
 
   fs.unlink(audioFilePath, (err) => {
