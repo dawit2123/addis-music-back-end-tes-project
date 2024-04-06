@@ -16,7 +16,11 @@ const app = express();
 
 //serving static files
 app.use(express.static(__dirname + "/public"));
-
+//setting the home directory
+app.use((req, res, next) => {
+  req.homedir = __dirname;
+  next();
+});
 app.use(cors());
 
 app.use(express.json());
