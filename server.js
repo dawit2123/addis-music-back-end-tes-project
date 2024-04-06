@@ -17,7 +17,14 @@ const app = express();
 //serving static files
 app.use(express.static(__dirname + "/public"));
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5000",
+      "https://addis-music-back-end-test-project.onrender.com/",
+    ],
+  })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
