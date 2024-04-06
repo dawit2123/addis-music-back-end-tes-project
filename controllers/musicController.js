@@ -112,6 +112,7 @@ export const deleteMusic = asyncHandler(async (req, res) => {
   const data = await Music.findById(req.params.id);
   const audioFilePath = `${__dirname}/../public/audio/music/${data.audioFile}`;
   const imageFilePath = `${__dirname}/../public/img/music/${data.coverImage}.jpeg`;
+  console.log(audioFilePath, imageFilePath);
 
   fs.unlink(audioFilePath, (err) => {
     if (err) {
