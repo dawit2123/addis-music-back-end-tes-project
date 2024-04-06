@@ -17,7 +17,7 @@ const musicSchema = new mongoose.Schema(
     },
     coverImage: {
       type: String,
-      // required: [true, "A music must have a cover image"],
+      required: [true, "A music must have a cover image"],
     },
     audioFile: {
       type: String,

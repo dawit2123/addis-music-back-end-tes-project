@@ -14,7 +14,6 @@ export const createMusic = asyncHandler(async (req, res) => {
   required_fields.forEach((field) => {
     if (!req.body[field]) errors.push(field + " is required!");
   });
-
   if (errors.length !== 0) {
     res.status(400).json({ message: errors });
   } else {
@@ -50,7 +49,6 @@ export const processFiles = asyncHandler(async (req, res, next) => {
         console.error("Error writing audio file:", err);
         return next(err);
       }
-      next();
     }
   );
   next();
@@ -76,12 +74,11 @@ export const uploadFiles = asyncHandler(async (req, res, next) => {
     { name: "audioFile", maxCount: 1 },
   ]);
 
-  upload(req, res, function (err) {
-    console.log(req.files["coverImage"]);
+  upload(req, null, function (err) {
     if (err instanceof multer.MulterError) {
-      return res.status(500).json(err);
+      console.log(err);
     } else if (err) {
-      return res.status(500).json(err);
+      console.log(err);
     }
     next();
   });
