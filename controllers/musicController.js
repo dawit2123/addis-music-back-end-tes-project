@@ -3,6 +3,11 @@ import { Music } from "../models/musicModel.js";
 import multer from "multer";
 import sharp from "sharp";
 import fs from "fs";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+const __dirname = path.dirname(__filename);
 export const getMusics = asyncHandler(async (req, res) => {
   const data = await Music.find();
   res.status(200).send(data);
@@ -35,9 +40,11 @@ export const processFiles = asyncHandler(async (req, res, next) => {
     .resize(3024, 4032)
     .toFormat("jpeg")
     .jpeg({ quality: 90 })
-    .toFile(`public/img/music/${req.files["coverImage"].originalname}.jpeg`);
+    .toFile(
+      `${__dirname}/public/img/music/${req.files["coverImage"].originalname}.jpeg`
+    );
   // Convert audio buffer to file and store it
-  const audioFilePath = `public/audio/music/${req.files["audioFile"].originalname}`;
+  const audioFilePath = `${__dirname}/public/audio/music/${req.files["audioFile"].originalname}`;
   fs.writeFile(
     audioFilePath,
     req.files["audioFile"][0].buffer,
@@ -103,8 +110,8 @@ export const updateMusic = asyncHandler(async (req, res) => {
 
 export const deleteMusic = asyncHandler(async (req, res) => {
   const data = await Music.findById(req.params.id);
-  const audioFilePath = `public/audio/music/${data.audioFile}`;
-  const imageFilePath = `public/img/music/${data.coverImage}.jpeg`;
+  const audioFilePath = `${__dirname}/public/audio/music/${data.audioFile}`;
+  const imageFilePath = `${__dirname}/public/img/music/${data.coverImage}.jpeg`;
 
   fs.unlink(audioFilePath, (err) => {
     if (err) {
