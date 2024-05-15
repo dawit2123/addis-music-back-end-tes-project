@@ -8,7 +8,7 @@ import mp3Duration from "mp3-duration";
 let audioFilePathGlobal;
 
 export const getMusics = asyncHandler(async (req, res) => {
-  const data = await Music.find();
+  const data = (await Music.find()).reverse();
   res.status(200).send(data);
 });
 export const createMusic = asyncHandler(async (req, res) => {
