@@ -5,10 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "client": "cd ../frontend && npm run dev",
-    "dev": "concurrently -n 'server,client' -c 'red,green' \"nodemon server.js\" \"npm run client\""
+    "start": "nodemon server.js"
   },
   "author": "Dawit Zewdu",
   "license": "MIT",
